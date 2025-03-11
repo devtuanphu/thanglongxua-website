@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.swiper-pagination-bullet {
+  margin-left: 3px;
+  margin-right: 3px;
+}
