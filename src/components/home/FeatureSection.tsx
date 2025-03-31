@@ -5,27 +5,34 @@ import {
   PercentageOutlined,
   CustomerServiceOutlined,
 } from "@ant-design/icons";
+interface FeaturedSectionProps {
+  destinations: string;
+  bestPrice: string;
+  topNotch: string;
+}
+const FeatureSection: React.FC<FeaturedSectionProps> = ({
+  destinations,
+  bestPrice,
+  topNotch,
+}) => {
+  const features = [
+    {
+      icon: <GlobalOutlined className="text-black text-4xl" />,
+      title: "DESTINATIONS",
+      description: destinations,
+    },
+    {
+      icon: <PercentageOutlined className="text-black text-4xl" />,
+      title: "BEST PRICE GUARANTEE",
+      description: bestPrice,
+    },
+    {
+      icon: <CustomerServiceOutlined className="text-black text-4xl" />,
+      title: "TOP NOTCH SUPPORT",
+      description: topNotch,
+    },
+  ];
 
-const features = [
-  {
-    icon: <GlobalOutlined className="text-black text-4xl" />,
-    title: "DESTINATIONS",
-    description: "Our expert team handpicked all destinations in this site.",
-  },
-  {
-    icon: <PercentageOutlined className="text-black text-4xl" />,
-    title: "BEST PRICE GUARANTEE",
-    description: "Price match within 48 hours of order confirmation.",
-  },
-  {
-    icon: <CustomerServiceOutlined className="text-black text-4xl" />,
-    title: "TOP NOTCH SUPPORT",
-    description:
-      "We are here to help, before, during, and even after your trip.",
-  },
-];
-
-const FeatureSection = () => {
   return (
     <div className="container">
       <div className="bg-blue-500 text-white py-8 px-4">

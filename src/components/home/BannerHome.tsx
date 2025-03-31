@@ -10,8 +10,12 @@ import Image from "next/image";
 import bannerImg from "../../../public/images/MAI-CHAU-PU-LUONG.jpg";
 
 const { Option } = Select;
+interface BannerHomeProps {
+  titieHome: string;
+  subTitle: string;
+}
 
-const BannerHome = () => {
+const BannerHome: React.FC<BannerHomeProps> = ({ titieHome, subTitle }) => {
   return (
     <div className="relative w-full h-[500px] flex flex-col justify-center items-center text-center px-4">
       {/* Background Image */}
@@ -28,12 +32,8 @@ const BannerHome = () => {
 
       {/* Overlay Content */}
       <div className="relative z-10 text-white w-full max-w-[1200px]">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          Explore Your Favourite Destinations
-        </h1>
-        <p className="text-lg md:text-xl mt-2">
-          Discover amazing places at exclusive deals
-        </p>
+        <h1 className="text-3xl md:text-5xl font-bold">{titieHome}</h1>
+        <p className="text-lg md:text-xl mt-2">{subTitle}</p>
 
         {/* Search Bar */}
         <div className="mt-6  shadow-lg rounded-full flex flex-wrap md:flex-nowrap items-center p-3 w-full max-w-[900px] mx-auto gap-3 md:gap-x-4 transition-all">

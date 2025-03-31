@@ -7,8 +7,11 @@ import {
   InstagramOutlined,
   YoutubeOutlined,
 } from "@ant-design/icons";
+interface NewsletterSectionProps {
+  data: any;
+}
 
-const NewsletterSection = () => {
+const NewsletterSection: React.FC<NewsletterSectionProps> = ({ data }) => {
   return (
     <div className="py-8">
       {" "}
@@ -20,18 +23,19 @@ const NewsletterSection = () => {
               Browse Tour By Category
             </h3>
             <div className="grid grid-cols-2 gap-2 mt-4">
-              <Link href="/" className="text-blue-600 hover:underline">
-                Amazing Ha Noi
-              </Link>
-              <Link href="/" className="text-blue-600 hover:underline">
-                Amazing Ninh Binh
-              </Link>
-              <Link href="/" className="text-blue-600 hover:underline">
-                Amazing Mai Chau - Pu Luong
-              </Link>
-              <Link href="/" className="text-blue-600 hover:underline">
-                Amazing Ha Long
-              </Link>
+              {data &&
+                data?.map((item: any) => {
+                  return (
+                    <>
+                      <Link
+                        href={`/destinations/${item?.attributes?.slug}`}
+                        className="text-blue-600 hover:underline"
+                      >
+                        {item?.attributes?.title}
+                      </Link>
+                    </>
+                  );
+                })}
             </div>
           </div>
 

@@ -1,37 +1,10 @@
 "use server";
-import React from "react";
-import BannerHome from "@/components/home/BannerHome";
-import FeatureSection from "@/components/home/FeatureSection";
-import Popular from "@/components/home/Popular";
-import BoxDiscount from "@/components/share/BoxDiscount";
-import VideoSection from "@/components/home/VideoSection";
-import NewsletterSection from "@/components/home/NewsletterSection";
-import SectionArticles from "@/components/home/SectionArticles";
-import FeaturedSection from "@/components/home/FeaturedSection";
 import { ENDPOINT } from "@/enums/endpoint.enum";
-import { apiService } from "@/services/api.service";
-
+import React from "react";
 const searchData = {
   populate: ["seo.thumbnail"].toString(),
 };
-const searchDataDestinations = {
-  populate: ["seo.thumbnail", "tours"].toString(),
-};
 const searchParams = new URLSearchParams(searchData).toString();
-const searchParamsDestinations = new URLSearchParams(
-  searchDataDestinations
-).toString();
-
-async function fetchData(endpoint: any) {
-  try {
-    const data = await apiService.get(endpoint);
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
-}
-
 async function fetchWithToken(endpoint: any) {
   const token = process.env.NEXT_PUBLIC_TOKEN_DEV;
 
@@ -50,9 +23,10 @@ async function fetchWithToken(endpoint: any) {
 
   return response.json();
 }
-
 export async function generateMetadata() {
-  const dataHome = await fetchWithToken(`${ENDPOINT.GET_HOME}?${searchParams}`);
+  const dataHome = await fetchWithToken(
+    `${ENDPOINT.GET_CONTACT}?${searchParams}`
+  );
 
   const seo =
     (dataHome &&
@@ -110,42 +84,21 @@ export async function generateMetadata() {
     },
   };
 }
-const Home = async () => {
-  const dataHome = await fetchWithToken(`${ENDPOINT.GET_HOME}?${searchParams}`);
-  const destinationsHome = await fetchWithToken(
-    `${ENDPOINT.GET_DESTINATIONS_HOME}?${searchParamsDestinations}&filters[isHome][$eq]=true`
+const page = async () => {
+  const dataContact = await fetchWithToken(
+    `${ENDPOINT.GET_CONTACT}?${searchParams}`
   );
+  const content =
+    dataContact?.data?.attributes?.content || "<p>No content available</p>";
 
-  const toursHome = await fetchWithToken(
-    `${ENDPOINT.GET_TOURS}?${searchParamsDestinations}&filters[isHome][$eq]=true`
-  );
-  const blogs = await fetchWithToken(
-    `${ENDPOINT.GET_BLOG}?${searchParams}&pagination[page]=1&pagination[pageSize]=3`
-  );
-  const titieHome = dataHome?.data?.attributes?.title;
-  const subTitle = dataHome?.data?.attributes?.subTitle;
-  const destinations = dataHome?.data?.attributes?.destinations;
-  const bestPrice = dataHome?.data?.attributes?.bestPrice;
-  const topNotch = dataHome?.data?.attributes?.topNotch;
   return (
-    <div>
-      <main>
-        <BannerHome titieHome={titieHome} subTitle={subTitle} />
-        <FeatureSection
-          destinations={destinations}
-          bestPrice={bestPrice}
-          topNotch={topNotch}
-        />
-        <Popular isTour={false} data={destinationsHome?.data} />
-        <Popular isTour={true} data={toursHome?.data} />
-        <BoxDiscount />
-        <VideoSection />
-        <NewsletterSection data={destinationsHome?.data} />
-        <SectionArticles data={blogs?.data} />
-        <FeaturedSection />
-      </main>
+    <div className="container p-4">
+      <div
+        className="mt-4 prose max-w-none"
+        dangerouslySetInnerHTML={{ __html: content }}
+      ></div>
     </div>
   );
 };
 
-export default Home;
+export default page;

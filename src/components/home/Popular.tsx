@@ -6,8 +6,9 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 import CardTour from "../share/CardTour";
 interface PopularProps {
   isTour: boolean;
+  data: any;
 }
-const Popular: React.FC<PopularProps> = ({ isTour }) => {
+const Popular: React.FC<PopularProps> = ({ isTour, data }) => {
   return (
     <div className="container py-8">
       {/* Title */}
@@ -26,9 +27,15 @@ const Popular: React.FC<PopularProps> = ({ isTour }) => {
 
       {/* Grid Layout */}
       <div className="grid grid-cols-12 gap-6">
-        <div className={`col-span-12 md:col-span-4`}>
-          {isTour ? <CardTour /> : <CartDestinations />}
-        </div>
+        {data?.map((item: any) => (
+          <div key={item.id} className="col-span-12 md:col-span-4">
+            {isTour ? (
+              <CardTour data={item} />
+            ) : (
+              <CartDestinations data={item} />
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

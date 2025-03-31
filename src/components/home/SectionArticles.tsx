@@ -1,9 +1,13 @@
+"use server";
 import Link from "next/link";
 import React from "react";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import CardArticles from "./CardArticles";
+interface SectionArticlesProps {
+  data: any;
+}
 
-const SectionArticles = () => {
+const SectionArticles: React.FC<SectionArticlesProps> = async ({ data }) => {
   return (
     <div className="container py-8">
       <div className="text-center py-6">
@@ -19,15 +23,16 @@ const SectionArticles = () => {
         </Link>
       </div>
       <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-12 md:col-span-4">
-          <CardArticles />
-        </div>
-        <div className="col-span-12 md:col-span-4">
-          <CardArticles />
-        </div>
-        <div className="col-span-12 md:col-span-4">
-          <CardArticles />
-        </div>
+        {data &&
+          data?.map((item: any) => {
+            return (
+              <>
+                <div className="col-span-12 md:col-span-4">
+                  <CardArticles data={item} />
+                </div>
+              </>
+            );
+          })}
       </div>
     </div>
   );

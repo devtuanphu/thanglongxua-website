@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import logo from "../../../public/logo.jpg";
+import logo from "../../../public/images/logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,21 +31,21 @@ const Header = () => {
               <Image
                 src={logo}
                 alt="Logo"
-                width={200}
-                height={200}
-                className="w-[150px] md:w-[200px]"
+                width={100}
+                height={100}
+                className="w-[90px] md:w-[100px]"
               />
             </Link>
 
             <div className="block lg:hidden">
               {isOpen ? (
                 <CloseOutlined
-                  className="text-3xl text-[#304ba6]"
+                  className="text-3xl text-[#c1a256]"
                   onClick={() => setIsOpen(!isOpen)}
                 />
               ) : (
                 <MenuOutlined
-                  className="text-3xl text-[#304ba6]"
+                  className="text-3xl text-[#c1a256]"
                   onClick={() => setIsOpen(!isOpen)}
                 />
               )}
@@ -57,7 +57,7 @@ const Header = () => {
                 <Link
                   key={item.title}
                   href={item.link}
-                  className="text-[#304ba6] font-medium text-lg"
+                  className="text-[#c1a256] font-medium text-lg"
                 >
                   {item.title}
                 </Link>
@@ -84,7 +84,7 @@ const Header = () => {
                 <Link
                   key={item.title}
                   href={item.link}
-                  className="text-[#304ba6] hover:text-blue-500 font-medium text-lg"
+                  className="text-[#c1a256] hover:text-blue-500 font-medium text-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.title}

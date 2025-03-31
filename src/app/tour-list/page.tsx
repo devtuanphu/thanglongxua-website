@@ -1,15 +1,11 @@
 "use server";
 import React from "react";
-import BannerHome from "@/components/home/BannerHome";
-import FeatureSection from "@/components/home/FeatureSection";
-import Popular from "@/components/home/Popular";
-import BoxDiscount from "@/components/share/BoxDiscount";
-import VideoSection from "@/components/home/VideoSection";
-import NewsletterSection from "@/components/home/NewsletterSection";
-import SectionArticles from "@/components/home/SectionArticles";
-import FeaturedSection from "@/components/home/FeaturedSection";
+import CardTour from "@/components/share/CardTour";
 import { ENDPOINT } from "@/enums/endpoint.enum";
 import { apiService } from "@/services/api.service";
+import Image from "next/image";
+import Banner from "@/components/tour-list/Banner";
+import ListTour from "@/components/tour-list/ListTour";
 
 const searchData = {
   populate: ["seo.thumbnail"].toString(),
@@ -17,21 +13,10 @@ const searchData = {
 const searchDataDestinations = {
   populate: ["seo.thumbnail", "tours"].toString(),
 };
-const searchParams = new URLSearchParams(searchData).toString();
+const formattedSearchParams = new URLSearchParams(searchData).toString();
 const searchParamsDestinations = new URLSearchParams(
   searchDataDestinations
 ).toString();
-
-async function fetchData(endpoint: any) {
-  try {
-    const data = await apiService.get(endpoint);
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
-}
-
 async function fetchWithToken(endpoint: any) {
   const token = process.env.NEXT_PUBLIC_TOKEN_DEV;
 
@@ -50,9 +35,10 @@ async function fetchWithToken(endpoint: any) {
 
   return response.json();
 }
-
 export async function generateMetadata() {
-  const dataHome = await fetchWithToken(`${ENDPOINT.GET_HOME}?${searchParams}`);
+  const dataHome = await fetchWithToken(
+    `${ENDPOINT.GET_LIST_TOUR_PAGE}?${formattedSearchParams}`
+  );
 
   const seo =
     (dataHome &&
@@ -110,42 +96,40 @@ export async function generateMetadata() {
     },
   };
 }
-const Home = async () => {
-  const dataHome = await fetchWithToken(`${ENDPOINT.GET_HOME}?${searchParams}`);
-  const destinationsHome = await fetchWithToken(
-    `${ENDPOINT.GET_DESTINATIONS_HOME}?${searchParamsDestinations}&filters[isHome][$eq]=true`
+
+const page = async ({
+  searchParams,
+}: {
+  searchParams: { page?: string; pageSize?: string };
+}) => {
+  const pageNumber = searchParams.page || "1";
+  const pageSize = searchParams.pageSize || "9"; // Mặc định 10 mục mỗi trang
+
+  const tours = await fetchWithToken(
+    `${ENDPOINT.GET_TOURS}?${searchParamsDestinations}&pagination[page]=${pageNumber}&pagination[pageSize]=${pageSize}`
+  );
+  const tourListPage = await fetchWithToken(
+    `${ENDPOINT.GET_LIST_TOUR_PAGE}?${formattedSearchParams}`
   );
 
-  const toursHome = await fetchWithToken(
-    `${ENDPOINT.GET_TOURS}?${searchParamsDestinations}&filters[isHome][$eq]=true`
-  );
-  const blogs = await fetchWithToken(
-    `${ENDPOINT.GET_BLOG}?${searchParams}&pagination[page]=1&pagination[pageSize]=3`
-  );
-  const titieHome = dataHome?.data?.attributes?.title;
-  const subTitle = dataHome?.data?.attributes?.subTitle;
-  const destinations = dataHome?.data?.attributes?.destinations;
-  const bestPrice = dataHome?.data?.attributes?.bestPrice;
-  const topNotch = dataHome?.data?.attributes?.topNotch;
+  const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
+  const imageBanner =
+    tourListPage?.data?.attributes?.seo?.thumbnail?.data?.attributes?.url;
+  const title = tourListPage?.data?.attributes?.seo?.title;
+
   return (
     <div>
-      <main>
-        <BannerHome titieHome={titieHome} subTitle={subTitle} />
-        <FeatureSection
-          destinations={destinations}
-          bestPrice={bestPrice}
-          topNotch={topNotch}
+      <Banner imageUrl={`${baseUrl}${imageBanner}`} title={title} />
+      <div className="py-8">
+        <ListTour
+          data={tours?.data}
+          page={parseInt(pageNumber, 10)}
+          total={tours?.meta?.pagination.total}
+          pageSize={parseInt(pageSize, 10)}
         />
-        <Popular isTour={false} data={destinationsHome?.data} />
-        <Popular isTour={true} data={toursHome?.data} />
-        <BoxDiscount />
-        <VideoSection />
-        <NewsletterSection data={destinationsHome?.data} />
-        <SectionArticles data={blogs?.data} />
-        <FeaturedSection />
-      </main>
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default page;
