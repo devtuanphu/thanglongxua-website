@@ -4,7 +4,7 @@ import DetailTour from "@/components/tour-list/DetailTour";
 import React from "react";
 
 const searchData = {
-  populate: ["seo.thumbnail"].toString(),
+  populate: ["seo.thumbnail", "image"].toString(),
 };
 const formattedSearchParams = new URLSearchParams(searchData).toString();
 async function fetchWithToken(endpoint: any) {

@@ -9,12 +9,15 @@ import {
   DatePicker,
 } from "antd";
 import { motion } from "framer-motion";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 interface DetailTourProps {
   dataTour: any;
 }
 
 const DetailTour: React.FC<DetailTourProps> = ({ dataTour }) => {
+  const images = dataTour?.image?.data || [];
+  const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
   return (
     <div className="container mx-auto py-10">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -140,6 +143,32 @@ const DetailTour: React.FC<DetailTourProps> = ({ dataTour }) => {
           dangerouslySetInnerHTML={{ __html: dataTour.content }}
           className="prose max-w-none"
         />
+        <div className="py-4">
+          <Swiper
+            spaceBetween={15}
+            slidesPerView={1}
+            loop={true}
+            pagination={{ clickable: true }}
+            style={{ width: "100%" }}
+          >
+            {images.map((img: any) => {
+              // lấy ảnh medium nếu có, fallback url gốc
+              const url =
+                baseUrl + img.attributes?.formats?.medium?.url ||
+                baseUrl + img.attributes?.url;
+              return (
+                <SwiperSlide key={img.id}>
+                  <img
+                    src={url}
+                    alt={img.attributes?.alternativeText || "Tour Image"}
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
       </motion.div>
     </div>
   );
