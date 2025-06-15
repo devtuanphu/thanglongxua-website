@@ -14,8 +14,6 @@ interface ListBlogProps {
 const ListBlog: React.FC<ListBlogProps> = ({ data, page, total, pageSize }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  console.log("ListBlog data:", data);
-  console.log("Data length:", data.length);
 
   const handlePageChange = (newPage: number, newPageSize?: number) => {
     const params = new URLSearchParams(searchParams.toString());

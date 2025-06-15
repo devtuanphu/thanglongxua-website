@@ -11,4 +11,5 @@ export const ENDPOINT = {
   GET_TIN_TUC_PAGE: `${BASE_URL}/api/tin-tuc-page`,
   GET_ABOUT: `${BASE_URL}/api/about`,
   GET_CONTACT: `${BASE_URL}/api/contact`,
+  POST_BOOKING: `${BASE_URL}/api/bookings`,
 };

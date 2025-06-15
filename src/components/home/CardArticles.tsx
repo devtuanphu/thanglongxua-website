@@ -11,7 +11,6 @@ const CardArticles: React.FC<CardArticlesProps> = ({ data }) => {
   const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
   const image = data?.attributes?.seo?.thumbnail?.data?.attributes?.url;
   const createAt = formatDay(data?.attributes?.createdAt);
-  console.log(data);
 
   return (
     <>

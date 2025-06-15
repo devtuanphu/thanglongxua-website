@@ -74,7 +74,7 @@ const Footer = () => {
 
         {/* Cột 2: Amazing Travel Corp */}
         <div>
-          <h3 className="text-lg font-bold">Amazing Travel Corp</h3>
+          <h3 className="text-lg font-bold">Thang Long Xua</h3>
           {/* <p className="mt-2">Tour Operator License No</p>
           <p>01-174/2017/TCDL- GPLHQT</p> */}
           {dataFooter && (
@@ -86,7 +86,7 @@ const Footer = () => {
 
         {/* Cột 3: Office */}
         <div>
-          <h3 className="text-lg font-bold">Amazing Travel Corp Office</h3>
+          <h3 className="text-lg font-bold">Thang Long Xua Office</h3>
           {dataFooter && (
             <>
               <div

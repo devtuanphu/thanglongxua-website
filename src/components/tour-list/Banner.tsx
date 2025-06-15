@@ -5,19 +5,21 @@ import Image from "next/image";
 interface BannerProps {
   imageUrl: string;
   title: string;
+  width?: number;
+  height?: number;
 }
 
-const Banner: React.FC<BannerProps> = ({ imageUrl, title }) => {
+const Banner: React.FC<BannerProps> = ({ imageUrl, title, width, height }) => {
   return (
-    <div className="relative w-full h-[200px] md:h-[400px] lg:h-[300px] overflow-hidden">
+    <div className="relative w-full   overflow-hidden">
       {/* Background Image */}
       <Image
         src={imageUrl}
         alt={title}
-        layout="fill"
-        objectFit="cover"
         className="brightness-75"
         priority
+        width={width}
+        height={height}
       />
 
       {/* Overlay Text */}

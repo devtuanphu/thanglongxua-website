@@ -24,22 +24,24 @@ const ListTour: React.FC<ListTourProps> = ({ data, page, total, pageSize }) => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      {/* Danh sách Tour */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pb-8">
-        {data.map((tour, index) => (
-          <CardTour key={index} data={tour} />
-        ))}
-      </div>
+    <div className="container">
+      <div className="flex flex-col items-center">
+        {/* Danh sách Tour */}
+        <div className="grid grid-cols-12 gap-4 pb-8">
+          {data.map((tour, index) => (
+            <CardTour key={index} data={tour} />
+          ))}
+        </div>
 
-      {/* Phân trang */}
-      <Pagination
-        current={page}
-        total={total}
-        pageSize={pageSize}
-        onChange={handlePageChange}
-        className="mt-6"
-      />
+        {/* Phân trang */}
+        <Pagination
+          current={page}
+          total={total}
+          pageSize={pageSize}
+          onChange={handlePageChange}
+          className="mt-6"
+        />
+      </div>
     </div>
   );
 };

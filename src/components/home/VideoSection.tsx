@@ -21,9 +21,7 @@ const VideoSection = () => {
 
       {/* Overlay Content */}
       <div className="relative z-10 text-white">
-        <h2 className="text-2xl md:text-4xl font-bold">
-          Amazing Travel Corp Video
-        </h2>
+        <h2 className="text-2xl md:text-4xl font-bold">Thang Long Xua Video</h2>
 
         {/* Play Icon */}
         <div className="mt-6 flex justify-center">

@@ -10,8 +10,18 @@ interface CardArticlesProps {
 const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
   const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
 
+  const width =
+    data?.attributes?.seo?.thumbnail?.data?.attributes?.width ||
+    data?.seo?.thumbnail?.width;
+  const height =
+    data?.attributes?.seo?.thumbnail?.data?.attributes.height ||
+    data?.seo?.thumbnail?.height;
+
+  const priceOptions = data?.attributes?.options || [];
+  const price = priceOptions[priceOptions.length - 1]?.price;
+
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="col-span-12 md:col-span-4 bg-white shadow-lg rounded-lg overflow-hidden">
       {/* Tour Image */}
       <Link
         href={
@@ -20,7 +30,7 @@ const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
             : `/tour/${data?.slug}`
         }
       >
-        <div className="relative w-full h-[200px]">
+        <div className="relative w-full ">
           <Image
             src={
               data?.attributes?.seo?.thumbnail?.data?.attributes?.url
@@ -30,9 +40,10 @@ const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
                 : "/fallback-image.jpg"
             }
             alt="Amazing Mai Chau - Puluong - Ninh Binh 3 Days 2 Nights"
-            layout="fill"
             objectFit="cover"
             className="rounded-t-lg"
+            width={width}
+            height={height}
           />
         </div>
 
@@ -62,18 +73,13 @@ const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
 
           {/* Price - Discounted */}
           <div className="mt-3 text-gray-600 text-sm">
-            <span className="mr-2 line-through text-gray-400 text-base">
+            {/* <span className="mr-2 line-through text-gray-400 text-base">
               $
               {data?.attributes?.originalPrice != undefined
                 ? data?.attributes?.originalPrice
                 : data?.originalPrice}
-            </span>
-            <span className="text-blue-500 text-lg font-bold">
-              $
-              {data?.attributes?.discountPrice != undefined
-                ? data?.attributes?.discountPrice
-                : data?.discountPrice}
-            </span>
+            </span> */}
+            <span className="text-blue-500 text-lg font-bold">$ {price}</span>
           </div>
         </div>
       </Link>

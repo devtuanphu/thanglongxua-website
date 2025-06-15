@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import Hotline from "@/components/share/Hotline";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,8 +22,8 @@ export default function RootLayout({
     <html lang="en">
       <Header />
       <body className={inter.className}>
+        <Hotline />
         <AntdRegistry>
-          {" "}
           <NextTopLoader
             color="#c1a256"
             initialPosition={0.08}

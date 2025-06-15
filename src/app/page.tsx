@@ -15,7 +15,7 @@ const searchData = {
   populate: ["seo.thumbnail"].toString(),
 };
 const searchDataDestinations = {
-  populate: ["seo.thumbnail", "tours"].toString(),
+  populate: ["seo.thumbnail", "tours", "options", "saleWithQuanity"].toString(),
 };
 const searchParams = new URLSearchParams(searchData).toString();
 const searchParamsDestinations = new URLSearchParams(
@@ -127,6 +127,7 @@ const Home = async () => {
   const destinations = dataHome?.data?.attributes?.destinations;
   const bestPrice = dataHome?.data?.attributes?.bestPrice;
   const topNotch = dataHome?.data?.attributes?.topNotch;
+
   return (
     <div>
       <main>

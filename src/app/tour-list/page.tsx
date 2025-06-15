@@ -100,13 +100,15 @@ export async function generateMetadata() {
 const page = async ({
   searchParams,
 }: {
-  searchParams: { page?: string; pageSize?: string };
+  searchParams: { page?: string; pageSize?: string; category?: string };
 }) => {
   const pageNumber = searchParams.page || "1";
-  const pageSize = searchParams.pageSize || "9"; // Mặc định 10 mục mỗi trang
+  const pageSize = searchParams.pageSize || "9";
+  const category = searchParams.category || "";
+  const categoryFilter = category ? `&filters[category][$eq]=${category}` : "";
 
   const tours = await fetchWithToken(
-    `${ENDPOINT.GET_TOURS}?${searchParamsDestinations}&pagination[page]=${pageNumber}&pagination[pageSize]=${pageSize}`
+    `${ENDPOINT.GET_TOURS}?${searchParamsDestinations}&pagination[page]=${pageNumber}&pagination[pageSize]=${pageSize}${categoryFilter}`
   );
   const tourListPage = await fetchWithToken(
     `${ENDPOINT.GET_LIST_TOUR_PAGE}?${formattedSearchParams}`
@@ -117,9 +119,19 @@ const page = async ({
     tourListPage?.data?.attributes?.seo?.thumbnail?.data?.attributes?.url;
   const title = tourListPage?.data?.attributes?.seo?.title;
 
+  const width =
+    tourListPage?.data?.attributes?.seo?.thumbnail?.data?.attributes?.width;
+  const height =
+    tourListPage?.data?.attributes?.seo?.thumbnail?.data?.attributes?.height;
+
   return (
     <div>
-      <Banner imageUrl={`${baseUrl}${imageBanner}`} title={title} />
+      <Banner
+        imageUrl={`${baseUrl}${imageBanner}`}
+        title={title}
+        width={width}
+        height={height}
+      />
       <div className="py-8">
         <ListTour
           data={tours?.data}
