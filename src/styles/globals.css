@@ -5,3 +5,9 @@
   margin-left: 3px;
   margin-right: 3px;
 }
+html,
+body {
+  touch-action: manipulation; /* chặn double-tap zoom */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
