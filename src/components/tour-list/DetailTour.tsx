@@ -253,7 +253,7 @@ const DetailTour: React.FC<DetailTourProps> = ({ dataTour, idTour }) => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white shadow-2xl p-6 rounded-2xl border border-gray-200 space-y-6 sticky top-24 self-start"
+          className="bg-white shadow-2xl p-6 rounded-2xl border border-gray-200 space-y-6 sticky top-24 self-start w-full min-w-0"
         >
           <h2 className="text-xl font-semibold text-gray-700 text-center">
             Book This Tour
