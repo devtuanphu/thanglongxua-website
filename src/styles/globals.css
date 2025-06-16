@@ -199,3 +199,21 @@ body {
   display: block;
   word-break: break-word;
 }
+.rich-html p,
+.rich-html span,
+.rich-html div {
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.rich-html *[style*="width"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}
+
+.rich-html *[style*="margin"] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

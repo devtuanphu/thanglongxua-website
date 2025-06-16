@@ -11,6 +11,12 @@ import { ENDPOINT } from "@/enums/endpoint.enum";
 const { Option } = Select;
 const { TextArea } = Input;
 
+const cleanDangerousHTML = (html: string) =>
+  html
+    .replace(/style="[^"]*width:[^"]*"/gi, "") // xóa inline width
+    .replace(/style="[^"]*margin[^"]*"/gi, "") // xóa inline margin
+    .replace(/style="[^"]*"/gi, ""); // xóa toàn bộ inline style còn lại nếu cần
+
 interface OptionType {
   id: number;
   name: string;
@@ -229,7 +235,9 @@ const DetailTour: React.FC<DetailTourProps> = ({ dataTour, idTour }) => {
 
           <div
             className="rich-html"
-            dangerouslySetInnerHTML={{ __html: dataTour.content }}
+            dangerouslySetInnerHTML={{
+              __html: cleanDangerousHTML(dataTour.content),
+            }}
           />
         </motion.div>
 
