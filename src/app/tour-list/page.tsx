@@ -11,7 +11,7 @@ const searchData = {
   populate: ["seo.thumbnail"].toString(),
 };
 const searchDataDestinations = {
-  populate: ["seo.thumbnail", "tours"].toString(),
+  populate: ["seo.thumbnail", "tours", "options"].toString(),
 };
 const formattedSearchParams = new URLSearchParams(searchData).toString();
 const searchParamsDestinations = new URLSearchParams(
