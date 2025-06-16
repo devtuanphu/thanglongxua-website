@@ -11,11 +11,19 @@ import { ENDPOINT } from "@/enums/endpoint.enum";
 const { Option } = Select;
 const { TextArea } = Input;
 
-const cleanDangerousHTML = (html: string) =>
-  html
-    .replace(/style="[^"]*width:[^"]*"/gi, "") // xóa inline width
-    .replace(/style="[^"]*margin[^"]*"/gi, "") // xóa inline margin
-    .replace(/style="[^"]*"/gi, ""); // xóa toàn bộ inline style còn lại nếu cần
+const cleanDangerousHTML = (html: string): string => {
+  if (typeof window === "undefined") return html; // SSR guard
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const elementsWithStyle = doc.querySelectorAll("[style]");
+
+  elementsWithStyle.forEach((el) => {
+    el.removeAttribute("style");
+  });
+
+  return doc.body.innerHTML;
+};
 
 interface OptionType {
   id: number;
