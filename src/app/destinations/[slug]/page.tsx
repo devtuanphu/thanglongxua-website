@@ -5,7 +5,7 @@ import Banner from "@/components/tour-list/Banner";
 import ListTour from "@/components/tour-list/ListTour";
 
 const searchData = {
-  populate: ["seo.thumbnail", "tours"].toString(),
+  populate: ["seo.thumbnail", "tours", "options"].toString(),
 };
 
 const formattedSearchParams = new URLSearchParams(searchData).toString();
