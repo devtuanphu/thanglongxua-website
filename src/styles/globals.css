@@ -112,3 +112,65 @@ body {
     color: #333;
   }
 }
+.rich-html {
+  max-width: 100%;
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #1f2937;
+  word-break: break-word;
+}
+
+.rich-html * {
+  max-width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
+}
+
+.rich-html img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 1rem 0;
+  border-radius: 6px;
+}
+
+.rich-html iframe {
+  width: 100% !important;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  display: block;
+  margin: 1rem 0;
+}
+
+.rich-html pre,
+.rich-html code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.rich-html ul,
+.rich-html ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.rich-html a {
+  color: #2563eb;
+  word-break: break-word;
+  text-decoration: underline;
+}
+
+.rich-html blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 1rem;
+  color: #555;
+  font-style: italic;
+  background: #f9f9f9;
+  margin: 1rem 0;
+}
