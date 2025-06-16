@@ -228,7 +228,7 @@ const DetailTour: React.FC<DetailTourProps> = ({ dataTour, idTour }) => {
           </div>
 
           <div
-            className="rich-content"
+            className="rich-html"
             dangerouslySetInnerHTML={{ __html: dataTour.content }}
           />
         </motion.div>
