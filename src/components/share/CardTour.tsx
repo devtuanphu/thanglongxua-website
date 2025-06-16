@@ -64,7 +64,6 @@ const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
               : data?.time}
           </div>
 
-          {/* Rating */}
           <div className="flex items-center text-yellow-400 mt-2">
             {[...Array(5)].map((_, index) => (
               <StarFilled key={index} className="text-lg" />
