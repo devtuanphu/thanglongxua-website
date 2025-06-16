@@ -76,6 +76,7 @@ body {
 @media screen and (max-width: 768px) {
   table {
     width: 300px;
+    display: none;
   }
   .rich-html table,
   .rich-html thead,
