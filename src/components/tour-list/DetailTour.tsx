@@ -228,7 +228,7 @@ const DetailTour: React.FC<DetailTourProps> = ({ dataTour, idTour }) => {
           </div>
 
           <div
-            className="prose break-words whitespace-normal max-w-full overflow-hidden"
+            className="rich-content"
             dangerouslySetInnerHTML={{ __html: dataTour.content }}
           />
         </motion.div>

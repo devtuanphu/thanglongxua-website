@@ -8,8 +8,6 @@ interface CardArticlesProps {
   data: any;
 }
 const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
-  console.log(data);
-
   const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
 
   const width =
