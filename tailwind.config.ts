@@ -8,12 +8,15 @@ const config: Config = {
   ],
   safelist: [
     "rich-html",
-    "prose",
-    "break-words",
-    "whitespace-normal",
-    "overflow-x-auto",
-    "max-w-full",
-    "table-auto",
+    {
+      pattern: /prose(-[\w]*)?/,
+    },
+    {
+      pattern: /(break|overflow|whitespace|max-w)-[\w-]+/,
+    },
+    {
+      pattern: /table(-[\w]*)?/,
+    },
   ],
   theme: {
     extend: {
