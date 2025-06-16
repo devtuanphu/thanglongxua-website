@@ -6,6 +6,15 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    "rich-html",
+    "prose",
+    "break-words",
+    "whitespace-normal",
+    "overflow-x-auto",
+    "max-w-full",
+    "table-auto",
+  ],
   theme: {
     extend: {
       backgroundImage: {
