@@ -11,23 +11,104 @@ body {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
-/* global.css */
-.rich-content {
+/* GLOBAL FIX CHO HTML TỪ STRAPI */
+.rich-html {
   max-width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
   word-break: break-word;
   white-space: normal;
+  line-height: 1.6;
+  font-size: 16px;
+  color: #1f2937; /* text-gray-800 */
 }
 
-.rich-content * {
+.rich-html * {
   max-width: 100%;
-  word-wrap: break-word;
+  box-sizing: border-box;
+  word-break: break-word;
 }
 
-.rich-content table,
-.rich-content pre,
-.rich-content img {
-  max-width: 100%;
-  overflow-x: auto;
+.rich-html img,
+.rich-html iframe,
+.rich-html video {
+  max-width: 100% !important;
+  height: auto !important;
   display: block;
+}
+
+.rich-html pre {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.rich-html h1,
+.rich-html h2,
+.rich-html h3,
+.rich-html h4 {
+  font-weight: bold;
+  margin: 1em 0 0.5em 0;
+}
+
+.rich-html p {
+  margin-bottom: 1rem;
+}
+
+.rich-html table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.rich-html th,
+.rich-html td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+/* 🔥 Khi mobile: chuyển sang grid */
+@media screen and (max-width: 768px) {
+  table {
+    width: 100%;
+  }
+  .rich-html table,
+  .rich-html thead,
+  .rich-html tbody,
+  .rich-html tr,
+  .rich-html th,
+  .rich-html thead {
+    display: none;
+  }
+
+  .rich-html tr {
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    background: #f8f8f8;
+  }
+
+  .rich-html td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .rich-html td::before {
+    content: attr(data-label);
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #333;
+  }
 }

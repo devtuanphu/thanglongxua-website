@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { ClockCircleOutlined, StarFilled } from "@ant-design/icons";
 import TestImage from "../../../public/images/Amazing-Hanoi-10-scaled.jpg";
@@ -8,6 +8,23 @@ interface CardArticlesProps {
   data: any;
 }
 const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
+  useEffect(() => {
+    const tables = document.querySelectorAll(".rich-html table");
+    tables.forEach((table) => {
+      const headers = Array.from(table.querySelectorAll("thead th")).map(
+        (th) => th.textContent?.trim() || ""
+      );
+
+      table.querySelectorAll("tbody tr").forEach((row) => {
+        row.querySelectorAll("td").forEach((cell, i) => {
+          if (!cell.hasAttribute("data-label")) {
+            cell.setAttribute("data-label", headers[i] || `Column ${i + 1}`);
+          }
+        });
+      });
+    });
+  }, []);
+
   const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
 
   const width =

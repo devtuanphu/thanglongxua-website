@@ -102,7 +102,7 @@ const Header = () => {
         } transition-transform duration-300 ease-in-out`}
       >
         <div className="flex flex-col mt-20 space-y-4 px-6">
-          <Link href="/">
+          <Link href="/" onClick={() => setIsOpen(false)}>
             <Image
               src={logo}
               alt="Logo"
@@ -114,48 +114,54 @@ const Header = () => {
 
           {menuItems.map((item) => (
             <div key={item.title} className="flex flex-col">
-              <div
-                onClick={() =>
-                  item.submenu
-                    ? setActiveSubMenu((prev) =>
+              {item.submenu ? (
+                <>
+                  <div
+                    onClick={() =>
+                      setActiveSubMenu((prev) =>
                         prev === item.title ? "" : item.title
                       )
-                    : setIsOpen(false)
-                }
-                className="flex justify-between items-center text-[#c1a256] font-medium text-lg cursor-pointer py-2"
-              >
-                <span>{item.title}</span>
-                {item.submenu && (
-                  <DownOutlined
-                    className={`text-sm transition-transform duration-200 ${
-                      activeSubMenu === item.title ? "rotate-180" : ""
-                    }`}
-                  />
-                )}
-              </div>
-
-              {item.submenu && (
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    activeSubMenu === item.title
-                      ? "max-h-60 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="ml-3 bg-[#fff9f1] rounded-xl px-5 py-3 space-y-2 shadow-md">
-                    {item.submenu.map((sub) => (
-                      <Link
-                        key={sub.title}
-                        href={sub.link}
-                        className="flex items-center justify-between text-sm text-[#4d3900] hover:text-[#c1a256] hover:bg-[#f7f1e7] hover:translate-x-[2px] transition-all px-2 py-1.5 rounded-md"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <span>{sub.title}</span>
-                        <span className="text-xs">›</span>
-                      </Link>
-                    ))}
+                    }
+                    className="flex justify-between items-center text-[#c1a256] font-medium text-lg cursor-pointer py-2"
+                  >
+                    <span>{item.title}</span>
+                    <DownOutlined
+                      className={`text-sm transition-transform duration-200 ${
+                        activeSubMenu === item.title ? "rotate-180" : ""
+                      }`}
+                    />
                   </div>
-                </div>
+
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      activeSubMenu === item.title
+                        ? "max-h-60 opacity-100"
+                        : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <div className="ml-3 bg-[#fff9f1] rounded-xl px-5 py-3 space-y-2 shadow-md">
+                      {item.submenu.map((sub) => (
+                        <Link
+                          key={sub.title}
+                          href={sub.link}
+                          className="flex items-center justify-between text-sm text-[#4d3900] hover:text-[#c1a256] hover:bg-[#f7f1e7] hover:translate-x-[2px] transition-all px-2 py-1.5 rounded-md"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <span>{sub.title}</span>
+                          <span className="text-xs">›</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <Link
+                  href={item.link}
+                  onClick={() => setIsOpen(false)}
+                  className="text-[#c1a256] font-medium text-lg cursor-pointer py-2"
+                >
+                  {item.title}
+                </Link>
               )}
             </div>
           ))}
