@@ -174,3 +174,28 @@ body {
   background: #f9f9f9;
   margin: 1rem 0;
 }
+.rich-html {
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #1f2937;
+}
+
+.rich-html img,
+.rich-html iframe,
+.rich-html video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+}
+
+.rich-html table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+  word-break: break-word;
+}
