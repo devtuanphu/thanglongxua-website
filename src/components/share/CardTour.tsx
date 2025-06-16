@@ -8,6 +8,8 @@ interface CardArticlesProps {
   data: any;
 }
 const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
+  console.log(data);
+
   const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
 
   const width =
@@ -17,7 +19,7 @@ const CardTour: React.FC<CardArticlesProps> = ({ data }) => {
     data?.attributes?.seo?.thumbnail?.data?.attributes.height ||
     data?.seo?.thumbnail?.height;
 
-  const priceOptions = data?.attributes?.options || [];
+  const priceOptions = data?.attributes?.options || data?.options || [];
   const price = priceOptions[priceOptions.length - 1]?.price;
 
   return (

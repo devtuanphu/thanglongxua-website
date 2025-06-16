@@ -5,7 +5,7 @@ import Banner from "@/components/tour-list/Banner";
 import ListTour from "@/components/tour-list/ListTour";
 
 const searchData = {
-  populate: ["seo.thumbnail", "tours", "options"].toString(),
+  populate: ["seo.thumbnail", "tours"].toString(),
 };
 
 const formattedSearchParams = new URLSearchParams(searchData).toString();
@@ -106,32 +106,13 @@ const page = async ({
   const pageSize = searchParams.pageSize || "9"; // Mặc định 10 mục mỗi trang
 
   const { slug } = params;
-  const Desstinations = await fetchWithToken(
-    `${ENDPOINT.GET_DESTINATIONS_HOME}?${formattedSearchParams}&filters[slug][$eq]=${slug}`
-  );
+
   const tourByDesstinations = await fetchWithToken(
     `${ENDPOINT.GET_TOURS_BY_DESTINATION}/${slug}??page=${pageNumber}&pageSize=${pageSize}`
   );
 
-  const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
-  const imageBanner =
-    Desstinations?.data[0]?.attributes?.seo?.thumbnail?.data?.attributes?.url;
-  const title = Desstinations?.data[0]?.attributes?.seo?.title;
-
-  const width =
-    Desstinations?.data[0]?.attributes?.seo?.thumbnail?.data?.attributes?.width;
-  const height =
-    Desstinations?.data[0]?.attributes?.seo?.thumbnail?.data?.attributes
-      ?.height;
-
   return (
     <div>
-      {/* <Banner
-        imageUrl={`${baseUrl}${imageBanner}`}
-        title={title}
-        width={width}
-        height={height}
-      /> */}
       <div className="py-8">
         <ListTour
           data={tourByDesstinations?.data}
