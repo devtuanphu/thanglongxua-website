@@ -99,10 +99,11 @@ const page = async ({ params }: { params: { slug: string } }) => {
     `${ENDPOINT.GET_TOURS}?${formattedSearchParams}&filters[slug][$eq]=${slug}`
   );
   const dataTour = tourDetail?.data[0]?.attributes;
+  const idTour = tourDetail?.data[0]?.id;
 
   return (
     <div>
-      <DetailTour dataTour={dataTour} />
+      <DetailTour dataTour={dataTour} idTour={idTour} />
     </div>
   );
 };

@@ -35,6 +35,7 @@ interface ImageType {
 }
 
 interface DataTourProps {
+  id: number;
   title: string;
   time: string;
   maxPeople: number;
@@ -46,13 +47,15 @@ interface DataTourProps {
   image: { data: ImageType[] };
   options: OptionType[];
   saleWithQuanity: SaleType[];
+  rootCode: string;
 }
 
 interface DetailTourProps {
   dataTour: DataTourProps;
+  idTour: number;
 }
 
-const DetailTour: React.FC<DetailTourProps> = ({ dataTour }) => {
+const DetailTour: React.FC<DetailTourProps> = ({ dataTour, idTour }) => {
   const images = dataTour?.image?.data || [];
   const baseUrl = process.env.NEXT_PUBLIC_URL_BE || "";
   const options = dataTour.options || [];
@@ -116,8 +119,10 @@ const DetailTour: React.FC<DetailTourProps> = ({ dataTour }) => {
           dateStart: dateStart.toISOString(),
           status: "Pending",
           statusPayment: "No",
-          tour: selectedOption.id,
+          tour: idTour,
           total: calculateDiscountPrice().toFixed(2),
+          option: selectedOption.name,
+          root: dataTour.rootCode,
         },
       };
 
@@ -218,7 +223,7 @@ const DetailTour: React.FC<DetailTourProps> = ({ dataTour }) => {
               <strong>📍 Drop-off Location:</strong> {dataTour.returnLocation}
             </div>
             <div>
-              <strong>🕒 Start Time:</strong> {dataTour.startTime}
+              <strong>🕒 Time:</strong> {dataTour.time}
             </div>
           </div>
 
