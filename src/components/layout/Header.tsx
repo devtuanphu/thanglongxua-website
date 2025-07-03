@@ -25,7 +25,7 @@ const Header = () => {
         { title: "Ha Noi", link: "/tour-list?category=hanoi" },
       ],
     },
-    { title: "Contact Us", link: "/contact-us" },
+    // { title: "Contact Us", link: "/contact-us" },
     { title: "About Us", link: "/about-us" },
     { title: "Blog", link: "/blog" },
   ];

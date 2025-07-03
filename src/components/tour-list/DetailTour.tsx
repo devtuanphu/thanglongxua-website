@@ -7,6 +7,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import "swiper/css";
 import { ENDPOINT } from "@/enums/endpoint.enum";
+import { Autoplay, Pagination } from "swiper/modules"; // ✅ THÊM DÒNG NÀY
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -192,7 +193,15 @@ const DetailTour: React.FC<DetailTourProps> = ({ dataTour, idTour }) => {
       </Modal>
 
       <div className="rounded-2xl overflow-hidden shadow-lg">
-        <Swiper spaceBetween={10} slidesPerView={1} loop>
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          loop
+          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          pagination={{ clickable: true }} // Hiện dot và cho phép click
+          modules={[Autoplay, Pagination]} // Thêm module
+          className="relative"
+        >
           {images.map((img) => {
             const url =
               baseUrl +
